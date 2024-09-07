@@ -1,6 +1,7 @@
 import css from "./SearchBar.module.css";
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
+import ToasterText from "../ToastText/ToastText";
 
 export default function SearchBar({onSubmit}){
     const [searchQuery, setSearchQuery] = useState('');
@@ -10,9 +11,11 @@ export default function SearchBar({onSubmit}){
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
+      e.preventDefault();
+      console.log('searchQuery- ', searchQuery);
     if (!searchQuery.trim()) {
-      return toast.error('Field is ampty');
+        <ToasterText text="input text" />
+        return;
     }
     onSubmit(searchQuery);
     setSearchQuery('');
@@ -20,7 +23,7 @@ export default function SearchBar({onSubmit}){
     
 return (
     <div className={css.searchBox}>
- <Toaster />
+
         <form className={css.searchForm} onSubmit={handleSubmit}>
 <input type="text" autoComplete="off" autoFocus value={searchQuery}
         onChange={handleChange}
