@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
-import { fetchPhotoItems } from './api/apiPhotos.js';
 import Loader from './components/Loader/Loader.jsx';
 import { Heading } from './components/Heading/Heading.jsx';
 import PhotosGallery from './components/PhotosGallery/PhotosGallery.jsx';
@@ -36,7 +35,7 @@ const [visible, setVisible] = useState(false)
       setLoading(true);
       setError(null);
 try {
-      const {results, total} = await fetchPhotoItems(query, page, per_page);
+      // const {results, total} = await fetchPhotoItems(query, page, per_page);
   // console.log('API response total:', total);
   // console.log('API response total_pages:', total_pages);
   // console.log('API response results:', results);
