@@ -35,7 +35,7 @@ const [visible, setVisible] = useState(false)
       setLoading(true);
       setError(null);
 try {
-      // const {results, total} = await fetchPhotoItems(query, page, per_page);
+      const {results, total} = await fetchPhotoItems(query, page, per_page);
   // console.log('API response total:', total);
   // console.log('API response total_pages:', total_pages);
   // console.log('API response results:', results);
