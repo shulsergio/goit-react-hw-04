@@ -89,9 +89,9 @@ function closeModal() {
     <>
       <SearchBar onSubmit={onHandleSubmit} />
       {loading && <Loader />}
-      {error && <Heading title="Something wrong!" />}
+      {error && <Heading title="Something wrong, try again..." />}
       {photos.length > 0 && <PhotosGallery photos={photos} openModal={openModal} />}
-      {empty && <Heading title="No images" />}
+      {empty && <Heading title="no images, try again..." />}
 
 {visible && (
     <LoadMoreBtn onLoadMoreBtn={handleLoadMoreBtn} />
