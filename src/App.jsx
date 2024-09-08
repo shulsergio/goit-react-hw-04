@@ -7,6 +7,7 @@ import { Heading } from './components/Heading/Heading.jsx';
 import PhotosGallery from './components/PhotosGallery/PhotosGallery.jsx';
 import PhotosModal from './components/PhotosModal/PhotosModal.jsx';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
+import { fetchPhotoItems } from './components/Api/apiPhotos.js';
 
 function App() {
   const [query, setQuery] = useState('');
