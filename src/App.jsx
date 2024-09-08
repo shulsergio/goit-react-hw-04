@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
+
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
-// import Grid from './components/Grid/Grid';
 import { fetchPhotoItems } from './Api/apiPhotos.js';
 import Loader from './components/Loader/Loader.jsx';
+import { Heading } from './components/Heading/Heading.jsx';
+import PhotosGallery from './components/PhotosGallery/PhotosGallery.jsx';
+import PhotosModal from './components/PhotosModal/PhotosModal.jsx';
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -14,8 +18,14 @@ function App() {
 
   const [empty, setEmpty] = useState(false);
 
-const [isWisebele, setisWiseble] = useState(false)
+const [visible, setVisible] = useState(false)
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [itemModal, setItemModal] = useState("");
+  const [altModal, setaltModal] = useState("");
+  
+  
+  
   useEffect(() => {
             const per_page = 12;
     if (!query) {
@@ -27,14 +37,16 @@ const [isWisebele, setisWiseble] = useState(false)
       setError(null);
 try {
       const {results, total, total_pages} = await fetchPhotoItems(query, page, per_page);
-  console.log('API response total:', total);
-  console.log('API response total_pages:', total_pages);
-  console.log('API response results:', results);
+  // console.log('API response total:', total);
+  // console.log('API response total_pages:', total_pages);
+  // console.log('API response results:', results);
         if(!results.length){
           return setEmpty(true)
         } 
-        setPhotos((prevPhotos) => [...prevPhotos, ...results]);
-        setisWiseble(page < Math.ceil(total / total_pages));
+  setPhotos((prevPhotos) => [...prevPhotos, ...results]);
+  // console.log('page- ', page);
+  // console.log('total- ', total);
+        setVisible(page*per_page < total);
 
 } catch (error) {
   setError(error);
@@ -51,18 +63,46 @@ try {
     setPhotos([]);
     setPage(1);
     setError(null);
-    setisWiseble(false);
+    setVisible(false);
     setEmpty(false);
   };
+
+  const handleLoadMoreBtn = () => {
+    setPage(page + 1);
+  };
+
+function openModal(regular, alt) {
+    setModalIsOpen(true);
+    setItemModal(regular);
+    setaltModal(alt);
+  }
+
+function closeModal() {
+    setModalIsOpen(false);
+    setItemModal('');
+    setaltModal('');
+  }
+
+
 
   return (
     <>
       <SearchBar onSubmit={onHandleSubmit} />
       {loading && <Loader />}
-      {}
-      {error && <p>Something went wrong!</p>}
-      {/* <Grid items={photos} /> */}
-      {/* {isEmpty && <Text textAlign="center">Sorry. There are no images ... 😭</Text>} */}
+      {error && <Heading title="Something wrong!" />}
+      {photos.length > 0 && <PhotosGallery photos={photos} openModal={openModal} />}
+      {empty && <Heading title="No images" />}
+
+{visible && (
+    <LoadMoreBtn onLoadMoreBtn={handleLoadMoreBtn} />
+      )} 
+      
+      <PhotosModal
+    urlModal={itemModal}
+    altModal={altModal}
+    modalIsOpen={modalIsOpen}
+    closeModal={closeModal}
+/>
     </>
   );
 }
