@@ -4,8 +4,8 @@ import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import Loader from './components/Loader/Loader.jsx';
 import { Heading } from './components/Heading/Heading.jsx';
-import PhotosGallery from './components/PhotosGallery/PhotosGallery.jsx';
-import PhotosModal from './components/PhotosModal/PhotosModal.jsx';
+import ImageGallery from './components/ImageGallery/ImageGallery.jsx';
+import ImageModal from './components/ImageModal/ImageModal.jsx';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
 import { fetchPhotoItems } from './components/Api/apiPhotos.js';
 
@@ -90,14 +90,14 @@ function closeModal() {
       <SearchBar onSubmit={onHandleSubmit} />
       {loading && <Loader />}
       {error && <Heading title="Something wrong, try again..." />}
-      {photos.length > 0 && <PhotosGallery photos={photos} openModal={openModal} />}
+      {photos.length > 0 && <ImageGallery photos={photos} openModal={openModal} />}
       {empty && <Heading title="no images, try again..." />}
 
 {visible && (
     <LoadMoreBtn onLoadMoreBtn={handleLoadMoreBtn} />
       )} 
       
-      <PhotosModal
+      <ImageModal
     urlModal={itemModal}
     altModal={altModal}
     modalIsOpen={modalIsOpen}

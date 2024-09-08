@@ -1,9 +1,9 @@
 import Modal from "react-modal";
-import css from './PhotosModal.module.css'; 
+import css from './ImageModal.module.css'; 
 
 Modal.setAppElement("#root");
 
-export default function PhotosModal({ urlModal, altModal, modalIsOpen, closeModal }) {
+export default function ImageModal({ urlModal, altModal, modalIsOpen, closeModal }) {
   return (
     <Modal
       isOpen={modalIsOpen}

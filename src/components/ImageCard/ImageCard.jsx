@@ -1,6 +1,6 @@
-import css from "./PhotosCard.module.css";
+import css from "./ImageCard.module.css";
 
-export default function PhotosCard({ photo, openModal }) {
+export default function ImageCard({ photo, openModal }) {
     const regular = photo.urls.regular;
     // console.log('Regular URL:', regular); 
 
